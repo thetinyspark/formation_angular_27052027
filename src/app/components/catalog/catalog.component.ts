@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CATALOG } from '../../mocks/product.mocks';
 import { Product } from '../../model/product';
 import { NgFor } from '@angular/common';
+import { CatalogService } from '../../services/catalog.service';
 
 @Component({
   selector: 'app-catalog',
@@ -12,9 +13,12 @@ import { NgFor } from '@angular/common';
 })
 export class CatalogComponent {
 
+  public catalog = inject(CatalogService);
   public products: Product[] = [];
 
   ngOnInit() {
-    this.products = CATALOG;
+    this.catalog.getProducts().subscribe((products) => {
+      this.products = products;
+    });
   }
 }
