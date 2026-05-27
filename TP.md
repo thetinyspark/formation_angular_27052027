@@ -1,13 +1,17 @@
-# TP n°4 
+# TP n°5 
 
-- Créer un pipe qui trie les produits par plateformes. 
-- L'appliquer au tableau de produits. 
+- Créer un service nommé CartService
+- Ce service va disposer de 4 méthodes: 
 
-
-- Créer un pipe qui permet de trier les produits en fonction d'un prix min et max puis l'appliquer au tableau de produits. 
-
+- addToCart( product:Product ) // ajoute un produit au panier
+- removeFromCart( product:Product ) // supprime un produit du panier
+- getCart():Product[] // retourne le panier
+- reset():void // détruit le panier
 
 
 Bonus: 
 
-- Créer un pipe permettant de regrouper les 3 pipes pour une meilleure lisibilité. 
+à l'aide de l'API native javascript localstorage, faire en sorte 
+que le panier soit persistant (en gros, il suffit à un refresh de la page avec F5)
+
+

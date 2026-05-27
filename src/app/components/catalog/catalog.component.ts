@@ -4,11 +4,12 @@ import { NgFor } from '@angular/common';
 import { CatalogService } from '../../services/catalog.service';
 import { FormsModule } from '@angular/forms';
 import { ProductFilterPipe } from '../../pipes/product-filter.pipe';
+import { ProductComponent } from '../product/product.component';
 
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [NgFor, FormsModule, ProductFilterPipe],
+  imports: [NgFor, FormsModule, ProductFilterPipe, ProductComponent],
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.css'
 })
@@ -35,6 +36,12 @@ export class CatalogComponent {
       platform: this.platform,
       minPrice: this.minPrice,
       maxPrice: this.maxPrice
+    }
+  }
+
+  public addToCart(product: Product|null): void {
+    if( product != null ) {
+      console.log("Adding to cart: ", product);
     }
   }
 }

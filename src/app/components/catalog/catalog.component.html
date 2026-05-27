@@ -17,10 +17,8 @@
 
 <br/>
 
-<div *ngFor="let product of products|productFilter:getFilters()" class="product">
-  <h2>{{ product.name }}</h2>
-  <p>{{ product.description }}</p>
-  <p>Price: {{ product.price }}</p>
-  <p>Platform: {{ product.platform }}</p>
-  <img [src]="product.img" alt="{{ product.name }}" />
-</div>
+<app-product    *ngFor="let currentProduct of products|productFilter:getFilters()" 
+                [product]="currentProduct"
+                [canBuy]="true"
+                (onAddToCart)="addToCart($event)"
+                class="product" />
