@@ -7,11 +7,17 @@
 <div>
     <label>Name: </label>
     <input [(ngModel)]="search" placeholder="Search products..." />
+    <br/>
+    <label>Price min: </label>
+    <input type="number" [(ngModel)]="minPrice" placeholder="Min price" />
+    <br/>
+    <label>Price max: </label>
+    <input type="number" [(ngModel)]="maxPrice" placeholder="Max price" />
 </div>
 
 <br/>
 
-<div *ngFor="let product of products|name:search" class="product">
+<div *ngFor="let product of products|productFilter:getFilters()" class="product">
   <h2>{{ product.name }}</h2>
   <p>{{ product.description }}</p>
   <p>Price: {{ product.price }}</p>
