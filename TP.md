@@ -6,3 +6,5 @@ permettant de renvoyer la liste complète des plateformes construite
 
 Vous pouvez utiliser la méthode que vous souhaitez, toutefois, la liste 
 ne doit pas comporter de doublons. 
+
+Il faut également afficher la liste des plateformes dans une balise <select>
