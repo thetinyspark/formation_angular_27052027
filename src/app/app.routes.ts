@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { CatalogComponent } from './catalog/catalog.component';
-import { CartComponent } from './cart/cart.component';
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { CartComponent } from './components/cart/cart.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routeConfig: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
     title: 'Home page'
   },
