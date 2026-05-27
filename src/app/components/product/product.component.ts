@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../../model/product';
 import { NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, RouterLink],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -19,6 +20,9 @@ export class ProductComponent {
 
   @Input()
   public canRemove: boolean = false;
+
+  @Input()
+  public detailed: boolean = false;
 
   @Output()
   public onAddToCart: EventEmitter<Product|null> = new EventEmitter();
