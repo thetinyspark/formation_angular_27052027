@@ -1,1 +1,6 @@
-<p>cart works!</p>
+<app-product    *ngFor="let currentProduct of products" 
+                [product]="currentProduct"
+                [canBuy]="false"
+                [canRemove]="true"
+                (onRemoveFromCart)="removeFromCart($event)"
+                class="product" />

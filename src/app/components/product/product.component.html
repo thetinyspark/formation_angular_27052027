@@ -6,4 +6,5 @@
   <img [src]="product.img" alt="{{ product.name }}" /><br/>
 
   <button *ngIf="canBuy" (click)="addToCart()">Add to Cart</button>
+  <button *ngIf="canRemove" (click)="removeFromCart()">X</button>
 </div>

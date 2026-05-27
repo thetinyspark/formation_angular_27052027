@@ -5,6 +5,7 @@ import { CatalogService } from '../../services/catalog.service';
 import { FormsModule } from '@angular/forms';
 import { ProductFilterPipe } from '../../pipes/product-filter.pipe';
 import { ProductComponent } from '../product/product.component';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-catalog',
@@ -16,6 +17,7 @@ import { ProductComponent } from '../product/product.component';
 export class CatalogComponent {
 
   public catalog = inject(CatalogService);
+  public cart = inject(CartService);
   public products: Product[] = [];
   public search: string = '';
   public platform: string = 'All';
@@ -41,7 +43,7 @@ export class CatalogComponent {
 
   public addToCart(product: Product|null): void {
     if( product != null ) {
-      console.log("Adding to cart: ", product);
+      this.cart.addToCart(product);
     }
   }
 }
