@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { Product } from '../model/product';
 import { environment } from '../../environments/environment';
 
@@ -10,9 +10,19 @@ import { environment } from '../../environments/environment';
 export class CatalogService {
 
   public httpClient = inject(HttpClient);
-  constructor() { }
+  private _products: Product[] = [];
 
-  public getProducts():Observable<Product[]> {
-    return this.httpClient.get<Product[]>(environment.productApiUrl);
+
+  public async getProducts():Promise<Product[]> {
+    this._products = await firstValueFrom(this.httpClient.get<Product[]>(environment.productApiUrl));
+    return this._products;
+  }
+
+  public getPlatforms():string[]{
+    // le set n'admets aucun doublon et on construit un tableau à partir de ce set
+    // le set a été initialisé à partir d'un tableau de plateformes extraites du catalogue de produits
+    const results = Array.from( new Set( this._products.map((product) => product.platform) ) );
+    results.unshift("All");
+    return results;
   }
 }

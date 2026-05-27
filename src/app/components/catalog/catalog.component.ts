@@ -16,13 +16,11 @@ export class CatalogComponent {
   public catalog = inject(CatalogService);
   public products: Product[] = [];
 
-  ngOnInit() {
-    this.catalog.getProducts().subscribe((products) => {
-      this.products = products;
-    });
+  public async ngOnInit() {
+    this.products = await this.catalog.getProducts();
   }
 
-  public getData():string[]{
-    return ["data1", "data2", "data3"];
+  public getPlatforms():string[]{
+    return this.catalog.getPlatforms();
   }
 }
