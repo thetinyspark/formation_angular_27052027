@@ -1,10 +1,13 @@
-# TP n°3 
+# TP n°4 
 
-Créer une fonction getPlatforms() sur le composant CatalogComponent
-permettant de renvoyer la liste complète des plateformes construite 
-à partir des produits téléchargés à l'aide du service. 
+- Créer un pipe qui trie les produits par plateformes. 
+- L'appliquer au tableau de produits. 
 
-Vous pouvez utiliser la méthode que vous souhaitez, toutefois, la liste 
-ne doit pas comporter de doublons. 
 
-Il faut également afficher la liste des plateformes dans une balise <select>
+- Créer un pipe qui permet de trier les produits en fonction d'un prix min et max puis l'appliquer au tableau de produits. 
+
+
+
+Bonus: 
+
+- Créer un pipe permettant de regrouper les 3 pipes pour une meilleure lisibilité. 

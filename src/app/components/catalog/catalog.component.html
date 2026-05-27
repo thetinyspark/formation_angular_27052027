@@ -1,13 +1,17 @@
 
 <div>
-    <select>
-    <option *ngFor="let currentPlatform of getPlatforms()" [value]="currentPlatform">{{ currentPlatform }}</option>
+    <select [(ngModel)]="platform">
+        <option *ngFor="let currentPlatform of getPlatforms()" [value]="currentPlatform">{{ currentPlatform }}</option>
     </select>
+</div>
+<div>
+    <label>Name: </label>
+    <input [(ngModel)]="search" placeholder="Search products..." />
 </div>
 
 <br/>
 
-<div *ngFor="let product of products" class="product">
+<div *ngFor="let product of products|name:search" class="product">
   <h2>{{ product.name }}</h2>
   <p>{{ product.description }}</p>
   <p>Price: {{ product.price }}</p>
