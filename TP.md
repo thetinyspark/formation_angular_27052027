@@ -1,13 +1,15 @@
-# TP n°1 
+# TP n°2 
 
-Créer un composant IDCardComponent à l'aide de la commande ng generate component <nom_de_composant>
+Créer un composant NavBarComponent avec les liens suivants: 
 
-Puis ajouter des propriétés publiques à ce composant lui permettant d'afficher les informations suivantes: 
+- Home 
+- Catalogue
+- Cart
+- Login
 
-- Nom
-- Prénom
-- Âge
-- Sexe
+Chacun de ces liens devra nous mener à un composant du même nom ( il faut donc les créer ). 
 
+Il faut également ajouter les routes correspondantes dans app.routes.ts
 
-Faire en sorte d'ajouter le composant en question au composant app.component via son template html (et donc en utilisant le selector du IdCardComponent)
+Le composant navbar en lui-même est persistant quelle que soit le page, il sera 
+donc inclus dans le app.component.html en dur. 
