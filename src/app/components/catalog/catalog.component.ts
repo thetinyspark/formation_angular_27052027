@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductFilterPipe } from '../../pipes/product-filter.pipe';
 import { ProductComponent } from '../product/product.component';
 import { CartService } from '../../services/cart.service';
+import { SearchFilterType } from '../../model/types/SearchFilterType';
 
 @Component({
   selector: 'app-catalog',
@@ -32,7 +33,7 @@ export class CatalogComponent {
     return this.catalog.getPlatforms();
   }
 
-  public getFilters(): any {
+  public getFilters(): SearchFilterType {
     return {
       search: this.search,
       platform: this.platform,
