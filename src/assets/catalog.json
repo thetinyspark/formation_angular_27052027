@@ -10,7 +10,7 @@
   {
     "id": 2,
     "name": "Tetris",
-    "price": 999.99,
+    "price": 29.99,
     "description": "A classic puzzle game.",
     "img": "./assets/img/tetris.jpg",
     "platform": "Gameboy"

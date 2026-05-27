@@ -1,15 +1,8 @@
-# TP n°2 
+# TP n°3 
 
-Créer un composant NavBarComponent avec les liens suivants: 
+Créer une fonction getPlatforms() sur le composant CatalogComponent
+permettant de renvoyer la liste complète des plateformes construite 
+à partir des produits téléchargés à l'aide du service. 
 
-- Home 
-- Catalogue
-- Cart
-- Login
-
-Chacun de ces liens devra nous mener à un composant du même nom ( il faut donc les créer ). 
-
-Il faut également ajouter les routes correspondantes dans app.routes.ts
-
-Le composant navbar en lui-même est persistant quelle que soit le page, il sera 
-donc inclus dans le app.component.html en dur. 
+Vous pouvez utiliser la méthode que vous souhaitez, toutefois, la liste 
+ne doit pas comporter de doublons. 

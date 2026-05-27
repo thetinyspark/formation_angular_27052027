@@ -21,4 +21,8 @@ export class CatalogComponent {
       this.products = products;
     });
   }
+
+  public getData():string[]{
+    return ["data1", "data2", "data3"];
+  }
 }

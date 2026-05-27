@@ -5,3 +5,7 @@
   <p>Platform: {{ product.platform }}</p>
   <img [src]="product.img" alt="{{ product.name }}" />
 </div>
+
+<div *ngFor="let currentData of getData()">
+  <h2>{{ currentData }}</h2>
+</div>
