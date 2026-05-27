@@ -1,1 +1,5 @@
-<p>product-detail works!</p>
+<app-product    [product]="product"
+                [detailed]="true"
+                [canBuy]="true"
+                (onAddToCart)="addToCart($event)"
+                class="product" />

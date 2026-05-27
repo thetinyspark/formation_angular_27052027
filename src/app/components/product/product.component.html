@@ -1,15 +1,24 @@
-<div *ngIf="product != null">
+@if( product != null){
+<div>
     <h2>{{ product.name }}</h2>
     <img [src]="product.img" alt="{{ product.name }}" /><br />
     <p>Price: {{ product.price }}</p>
 
-    <div *ngIf="detailed == true">
-        <p>{{ product.description }}</p>
-        <p>Platform: {{ product.platform }}</p>
-    </div>
+    @if(detailed == true){
+        <div>
+            <p>{{ product.description }}</p>
+            <p>Platform: {{ product.platform }}</p>
+        </div>
+    }
+    @else{
+        <a [routerLink]="['/product', product.id]">Details</a><br />
+    }
 
-    <a [routerLink]="['/product', product.id]">Details</a><br />
+    @if( canBuy == true ){
+        <button (click)="addToCart()">Add to Cart</button>
+    }
 
-    <button *ngIf="canBuy" (click)="addToCart()">Add to Cart</button>
+
     <button *ngIf="canRemove" (click)="removeFromCart()">X</button>
 </div>
+}
