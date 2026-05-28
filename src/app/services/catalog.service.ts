@@ -15,13 +15,13 @@ export class CatalogService {
   public products$ = this._products$.asReadonly();
   public platforms$ = this._platforms$.asReadonly();
 
-  constructor() {
-    setInterval(() => {
-      this.refresh();
-    }, 10000);
+  // constructor() {
+  //   setInterval(() => {
+  //     this.refresh();
+  //   }, 10000);
 
-    this.refresh();
-  }
+  //   this.refresh();
+  // }
 
   public async refresh():Promise<void>{
     console.log('Refreshing catalog...');

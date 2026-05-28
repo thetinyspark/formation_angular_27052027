@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, Signal } from '@angular/core';
 import { Product } from '../../model/product';
 import { NgFor } from '@angular/common';
 import { CatalogService } from '../../services/catalog.service';
@@ -7,6 +7,7 @@ import { ProductFilterPipe } from '../../pipes/product-filter.pipe';
 import { ProductComponent } from '../product/product.component';
 import { CartService } from '../../services/cart.service';
 import { SearchFilterType } from '../../model/types/SearchFilterType';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
@@ -17,16 +18,27 @@ import { SearchFilterType } from '../../model/types/SearchFilterType';
 })
 export class CatalogComponent {
 
-  public catalog = inject(CatalogService);
+  public route = inject(ActivatedRoute);
+  // public catalog = inject(CatalogService);
   public cart = inject(CartService);
   public products: Product[] = [];
-  public products$ = this.catalog.products$;
-  public platforms$ = this.catalog.platforms$;
+  public products$ = signal<Product[]>([]);
+  public platforms$ = signal<string[]>([]);
 
   public search: string = '';
   public platform: string = 'All';
   public minPrice: number = 0;
   public maxPrice: number = 1000;
+
+  constructor() {
+    this.route.data.subscribe(data => {
+      if (data['catalog']) {
+        console.log('Catalog data resolved successfully', data['catalog']);
+        this.products$ = data['catalog'].catalog;
+        this.platforms$ = data['catalog'].platforms;
+      }
+    });
+  }
 
   public getFilters(): SearchFilterType {
     return {

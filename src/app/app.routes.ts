@@ -7,6 +7,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { isCartNotEmptyGuard } from './guards/is-cart-not-empty.guard';
 import { isConnectedGuard } from './guards/is-connected.guard';
 import { isNotConnectedGuard } from './guards/is-not-connected.guard';
+import { catalogResolver } from './resolvers/catalog.resolver';
 
 const routeConfig: Routes = [
   {
@@ -22,7 +23,10 @@ const routeConfig: Routes = [
   {
     path: 'catalog',
     component: CatalogComponent,
-    title: 'Catalog page'
+    title: 'Catalog page', 
+    resolve: { 
+      catalog: catalogResolver 
+    }
   },
   {
     path: 'cart',
