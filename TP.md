@@ -1,9 +1,24 @@
-# TP n°9
+# TP n°10
 
-- Sur CatalogService, recréer la fonction "get" du HttpClientService à l'aide 
-d'un new Observable + la méthode window.fetch. 
+- Créer un fichier roles.json qui contient les données suivantes: 
+[
+    {
+        userid: <userid>
+        role: <role>
+    }
+]
 
-Attention, veillez à bien compléter les flux de données pour éviter les fuites mémoires. 
-Vous pouvez utiliser la généricité pour caster le contenu du json que vous allez télécharger. 
+
+- sur le même modèle que la combinaison des salaires et des employes, 
+créer une fonction permettant de retourner les données suivantes: 
+
+[
+    {
+        id: <userid>
+        name: <username>
+        salary: <salary>
+        role: <role>
+    }
+]
 
 
