@@ -4,3 +4,8 @@
                 [canRemove]="true"
                 (onRemoveFromCart)="removeFromCart($event)"
                 class="product" />
+
+
+<p>VAT: {{vat()}}%</p>
+<p>Total Price: {{totalPrice()}}</p>
+<button (click)="raiseVat()">Raise VAT by 5%</button>

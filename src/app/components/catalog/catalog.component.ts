@@ -20,19 +20,13 @@ export class CatalogComponent {
   public catalog = inject(CatalogService);
   public cart = inject(CartService);
   public products: Product[] = [];
+  public products$ = this.catalog.products$;
+  public platforms$ = this.catalog.platforms$;
+
   public search: string = '';
   public platform: string = 'All';
   public minPrice: number = 0;
   public maxPrice: number = 1000;
-
-  public async ngOnInit() {
-    this.products = await this.catalog.getProducts();
-    this.catalog.run();
-  }
-
-  public getPlatforms():string[]{
-    return this.catalog.getPlatforms();
-  }
 
   public getFilters(): SearchFilterType {
     return {

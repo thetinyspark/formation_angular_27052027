@@ -1,6 +1,11 @@
-# TP n°11
+# TP n°12
 
-- Créer un observable de type subject qui diffuse une liste de prix HT
-- Créer un autre observable de type sucject qui diffuse une liste de taux de TVA
-- Combiner ces deux observables en un observable capable de diffuser un prix TTC
+- Modifier le CartService de façon à ce qu'il expose 3 signaux en readonly: 
+- Le premier signal est le signal<Product[]> qui est cart$
+- Le second est un signal<number> qui se nomme vat$
+- Le troisième est un signal<number> qui se nomme totalPrice$
+
+
+Bonus: 
+Ajouter une méthode setVAT(value:number) qui permet de redéfinir la TVA.
 

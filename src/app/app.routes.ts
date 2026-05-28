@@ -28,7 +28,7 @@ const routeConfig: Routes = [
     path: 'cart',
     component: CartComponent,
     title: 'Cart page',
-    canActivate: [isConnectedGuard, isCartNotEmptyGuard]
+    // canActivate: [isConnectedGuard, isCartNotEmptyGuard]
   },
   {
     path: 'login',

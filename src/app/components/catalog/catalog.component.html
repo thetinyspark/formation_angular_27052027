@@ -1,7 +1,7 @@
 
 <div>
     <select [(ngModel)]="platform">
-        <option *ngFor="let currentPlatform of getPlatforms()" [value]="currentPlatform">{{ currentPlatform }}</option>
+        <option *ngFor="let currentPlatform of platforms$()" [value]="currentPlatform">{{ currentPlatform }}</option>
     </select>
 </div>
 <div>
@@ -17,7 +17,7 @@
 
 <br/>
 
-<app-product    *ngFor="let currentProduct of products|productFilter:getFilters()" 
+<app-product    *ngFor="let currentProduct of products$()|productFilter:getFilters()" 
                 [product]="currentProduct"
                 [canBuy]="true"
                 (onAddToCart)="addToCart($event)"
