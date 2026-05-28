@@ -28,4 +28,39 @@ export class CatalogService {
     this._products = await this.getProducts();
     return this._products.find(product => product.id === id) || null;
   }
+
+  public async run():Promise<void>{
+    const waitFor4Seconds = new Promise<string>(
+      (resolve, reject)=>{
+        setTimeout(() => {
+          resolve("coucou");
+        }, 4000);
+      }
+    );
+
+    // Une promesse est un objet qui représente une opération asynchrone 
+    // et qui peut être dans l'un des trois états suivants : en attente (pending), 
+    // résolue (fulfilled) ou rejetée (rejected).
+    // C'est une façon standardisée de gérer les opérations asynchrones en Javascript. 
+
+    // une promesse ne peut être résolue ou rejetée qu'une seule fois. 
+    // Une fois qu'une promesse est résolue ou rejetée, son état ne peut plus changer.
+
+
+    console.log("le traitement commence");
+    waitFor4Seconds.then(
+      (result)=>{
+        console.log("4 secondes se sont écoulées", result);
+      }
+    ).catch(
+      (error)=>{
+        console.error("une erreur s'est produite : ", error);
+      }
+    ).finally(
+      ()=>{
+        console.log("le traitement est terminé");
+      }
+    );
+
+  }
 }

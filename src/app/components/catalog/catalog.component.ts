@@ -27,6 +27,7 @@ export class CatalogComponent {
 
   public async ngOnInit() {
     this.products = await this.catalog.getProducts();
+    this.catalog.run();
   }
 
   public getPlatforms():string[]{
