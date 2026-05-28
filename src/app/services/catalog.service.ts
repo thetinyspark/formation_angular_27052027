@@ -64,6 +64,9 @@ export class CatalogService {
     );
 
 
+    await Promise.all([promise])
+
+
     const results = await promise;
     console.log(results);
   }
