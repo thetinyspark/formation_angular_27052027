@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable, of } from 'rxjs';
 import { Product } from '../model/product';
 import { environment } from '../../environments/environment';
 
@@ -29,45 +29,56 @@ export class CatalogService {
     return this._products.find(product => product.id === id) || null;
   }
 
-  private async loadRemoteJSON<T>(url:string, defaultValue:T):Promise<T> {
-    
-    try{
-      return await(await fetch(url)).json() as T;
-    } 
-    catch(error){
-      console.error(`Error loading JSON from ${url}:`, error);
-      return defaultValue;
-    }
-
-  }
   public async run():Promise<void>{
 
-    const promise = new Promise(
-      async (resolve, reject) => {
-        type employee = { id: number; name: string };
-        type salary = { userid: number; amount: number };
-        const employees = await this.loadRemoteJSON<employee[]>('./assets/employees.json', []);
-        const salaries = await this.loadRemoteJSON<salary[]>('./assets/salaries.json', []);
-        resolve(
-            employees.map(
-              employee => {
-              const salary = salaries.find(salary => salary.userid === employee.id);
-              return {
-                id: employee.id,
-                name: employee.name,
-                salary: salary ? salary.amount : 0
-              };
-            }
-          )
-        );
+    // of est un opérateur de création d'observable qui émet les valeurs passées en argument
+    // const $obs1 = of(1,2,3); 
+    // $obs1.subscribe(
+    //   (value)  =>{
+    //     console.log("value", value);
+    //   }
+    // );
+
+
+    const $obs2 = new Observable<number>(
+      (subscriber) => {
+
+        setTimeout(() => {
+          subscriber.next(1);
+        }, 1000);
+
+        setTimeout(() => {
+          subscriber.next(2);
+        }, 2000);
+
+        setTimeout(() => {
+          subscriber.next(3);
+          subscriber.complete();
+          subscriber.next(4); // cette valeur ne sera pas émise car le subscriber est déjà complété
+        }, 3000);
+
+        return ()=>{
+          // cette fonction sera appelée lorsque le subscriber se désabonnera de l'observable
+          console.log("désabonnement de l'observable"); 
+        }
       }
     );
 
+    const subscription = $obs2.subscribe(
+      {
+        next: (value)  =>{
+          console.log("value", value);
+        },
+        error: (error) => {
+          console.error("error", error);
+        },
+        complete: () => {
+          console.log("complete");
+        }
+      }
+    );
 
-    await Promise.all([promise])
+    // subscription.unsubscribe(); // pour se désabonner de l'observable et ne plus recevoir de notifications
 
-
-    const results = await promise;
-    console.log(results);
   }
 }

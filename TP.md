@@ -1,30 +1,9 @@
-# TP n°8
+# TP n°9
 
-- Créer un fichier employees.json, contenant des données de ce type: 
-[
-    {
-        "id": <userid>,
-        "name": <username>
-    }
-]
-- Créer un fichier salaries.json, contenant des données sous cette forme: 
+- Sur CatalogService, recréer la fonction "get" du HttpClientService à l'aide 
+d'un new Observable + la méthode window.fetch. 
 
-[
-    {
-        "userid": <userid>
-        "amount": <amount>
-    }
-]
-
-
-- Dans la méthode du catalog service, créez une promesse customisée permettant de télécharger les deux fichiers en question, et de fournir en résultat un tableau d'objets de cette forme: 
-
-[
-    {
-        "id": <userid>,
-        "salary": <amount>,
-        "name": <username>
-    }
-]
+Attention, veillez à bien compléter les flux de données pour éviter les fuites mémoires. 
+Vous pouvez utiliser la généricité pour caster le contenu du json que vous allez télécharger. 
 
 
