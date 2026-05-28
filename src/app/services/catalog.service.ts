@@ -29,54 +29,31 @@ export class CatalogService {
     return this._products.find(product => product.id === id) || null;
   }
 
+  public get<T>(url:string): Observable<T> {
+    return new Observable<T>(
+      (subscriber) => {
+          fetch(url)
+            .then(response => {
+              return response.json();
+            })
+            .then(data => {
+              subscriber.next(data as T);
+              subscriber.complete();
+            })
+            .catch(error => subscriber.error(error));
+      }
+    );
+  }
+
   public async run():Promise<void>{
 
-    // of est un opérateur de création d'observable qui émet les valeurs passées en argument
-    // const $obs1 = of(1,2,3); 
-    // $obs1.subscribe(
-    //   (value)  =>{
-    //     console.log("value", value);
-    //   }
-    // );
+    type employee = {
+      id: number,
+      name: string
+    }; 
 
-
-    const $obs2 = new Observable<number>(
-      (subscriber) => {
-
-        setTimeout(() => {
-          subscriber.next(1);
-        }, 1000);
-
-        setTimeout(() => {
-          subscriber.next(2);
-        }, 2000);
-
-        setTimeout(() => {
-          subscriber.next(3);
-          subscriber.complete();
-          subscriber.next(4); // cette valeur ne sera pas émise car le subscriber est déjà complété
-        }, 3000);
-
-        return ()=>{
-          // cette fonction sera appelée lorsque le subscriber se désabonnera de l'observable
-          console.log("désabonnement de l'observable"); 
-        }
-      }
-    );
-
-    const subscription = $obs2.subscribe(
-      {
-        next: (value)  =>{
-          console.log("value", value);
-        },
-        error: (error) => {
-          console.error("error", error);
-        },
-        complete: () => {
-          console.log("complete");
-        }
-      }
-    );
+    console.log("Run method called");
+    this.get<employee[]>('./assets/employees.json').subscribe(console.log);
 
     // subscription.unsubscribe(); // pour se désabonner de l'observable et ne plus recevoir de notifications
 
