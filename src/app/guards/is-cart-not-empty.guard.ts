@@ -4,6 +4,6 @@ import { inject } from '@angular/core';
 
 export const isCartNotEmptyGuard: CanActivateFn = (route, state) => {
   const cartService: CartService = inject(CartService);
-  const cartItems = cartService.getCart();
+  const cartItems = cartService.cart$();
   return cartItems.length > 0;
 };
