@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { combineLatest, firstValueFrom, forkJoin, map, Observable, of } from 'rxjs';
+import { combineLatest, firstValueFrom, forkJoin, map, Observable, of, ReplaySubject, Subject, take, takeLast } from 'rxjs';
 import { Product } from '../model/product';
 import { environment } from '../../environments/environment';
 
@@ -115,5 +115,38 @@ export class CatalogService {
 
   public async run(): Promise<void> {
     // this.getEmployeesWithRoles().subscribe(console.log);
-  }
+
+    const $sub1 = new ReplaySubject<number>();
+    // setInterval(() => {
+    //   $sub1.next(Math.floor(Math.random() * 100));
+    // }, 5000);
+
+    // setTimeout(() => {
+    //   $sub1.complete();
+    // }, 11000);
+
+    // const $sub2 = new Subject<number>();
+
+    // combineLatest([$sub1, $sub2]).subscribe(([value1, value2]) => {
+    //   console.log(`Value 1: ${value1}, Value 2: ${value2}`);
+    // });
+
+    // forkJoin({v1: $sub1, v2: $sub2}).subscribe((data) => {
+    //   console.log(`Value 1: ${data.v1}, Value 2: ${data.v2}`);
+    // });
+
+    $sub1.next(42);
+    $sub1.next(50);
+    $sub1.next(60);
+    $sub1.next(100);
+
+    $sub1.subscribe();
+
+    // $sub2.complete();
+    // $sub1.complete();
+
+    // takeLast(3)($sub1).subscribe(console.log);
+
+
+}
 }

@@ -1,24 +1,6 @@
-# TP n°10
+# TP n°11
 
-- Créer un fichier roles.json qui contient les données suivantes: 
-[
-    {
-        userid: <userid>
-        role: <role>
-    }
-]
-
-
-- sur le même modèle que la combinaison des salaires et des employes, 
-créer une fonction permettant de retourner les données suivantes: 
-
-[
-    {
-        id: <userid>
-        name: <username>
-        salary: <salary>
-        role: <role>
-    }
-]
-
+- Créer un observable de type subject qui diffuse une liste de prix HT
+- Créer un autre observable de type sucject qui diffuse une liste de taux de TVA
+- Combiner ces deux observables en un observable capable de diffuser un prix TTC
 
