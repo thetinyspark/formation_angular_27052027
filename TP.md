@@ -1,15 +1,30 @@
-# TP n°7
+# TP n°8
 
-- Créer un service nommé LoginService qui contient une fonction nommée 
-login() prenant en paramètre un pseudo et un mot de passe. 
+- Créer un fichier employees.json, contenant des données de ce type: 
+[
+    {
+        "id": <userid>,
+        "name": <username>
+    }
+]
+- Créer un fichier salaries.json, contenant des données sous cette forme: 
 
-- Si le pseudo et le mot de passe sont égaux à "admin" et "admin", alors on connecte l'utilisateur. 
+[
+    {
+        "userid": <userid>
+        "amount": <amount>
+    }
+]
 
 
-- Vous pouvez tricher dans un premier temps, et utiliser le composant LoginComponent en ne mettant à l'intérieur qu'un bouton qui vous connecte avec les bons identifiants. 
+- Dans la méthode du catalog service, créez une promesse customisée permettant de télécharger les deux fichiers en question, et de fournir en résultat un tableau d'objets de cette forme: 
 
-- Une fois loggé, vous devez créer une guard nommée IsConnectedGuard et l'ajouter à la route du panier. 
-
-- Si l'utilisateur n'est pas connecté, alors il ne peut accéder à son panier et ce, même si ce dernier est remplit (et vice versa, si on est connectés mais avec un panier vide, on n'accède pas au panier).
+[
+    {
+        "id": <userid>,
+        "salary": <amount>,
+        "name": <username>
+    }
+]
 
 

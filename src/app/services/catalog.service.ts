@@ -45,22 +45,38 @@ export class CatalogService {
 
     // une promesse ne peut être résolue ou rejetée qu'une seule fois. 
     // Une fois qu'une promesse est résolue ou rejetée, son état ne peut plus changer.
-
-
     console.log("le traitement commence");
-    waitFor4Seconds.then(
-      (result)=>{
-        console.log("4 secondes se sont écoulées", result);
-      }
-    ).catch(
-      (error)=>{
-        console.error("une erreur s'est produite : ", error);
-      }
-    ).finally(
-      ()=>{
-        console.log("le traitement est terminé");
+
+    // une promesse traitée avec async/await doit être entourée d'un bloc try/catch pour gérer les erreurs potentielles.
+    // l'éxécution du code dans le bloc try est suspendue jusqu'à ce que la promesse soit résolue ou rejetée.
+    try{
+      const result = await waitFor4Seconds;
+      console.log("4 secondes se sont écoulées", result);
+    }
+    catch(error){
+      console.error("une erreur s'est produite : ", error);
+    }
+    finally{
+      console.log("le traitement est terminé");
+    }
+   
+
+    window.fetch("./assets/catalog.json").then(
+      (response)=>{
+        if( response.ok ) {
+          response.json().then(
+            (data)=>{
+              console.log("données du catalogue : ", data);
+            }
+          ).catch(
+            (error)=>{
+              console.error("une erreur s'est produite lors de la lecture du flux de données : ", error);
+            }
+          );
+        }
       }
     );
+
 
   }
 }
