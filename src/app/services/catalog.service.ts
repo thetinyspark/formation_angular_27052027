@@ -81,9 +81,39 @@ export class CatalogService {
     );
   }
 
-  public async run(): Promise<void> {
-    this.getEmployeesWithSalaries().subscribe(console.log);
+  public getEmployeesWithRoles(): Observable<{ id: number; name: string; salary: number, role:string }[]> {
+    type employee = { id: number; name: string; salary: number };
+    type role = {
+      userid: number;
+      role: string;
+    };
 
-    // subscription.unsubscribe(); // pour se désabonner de l'observable et ne plus recevoir de notifications
+    // forkjoin attend que tous les observables passés en argument aient émis 
+    // une valeur et se soient complétés pour émettre un tableau de résultats
+
+    return forkJoin(
+      {
+        employees: this.getEmployeesWithSalaries(),
+        roles: this.get<role[]>('./assets/roles.json'),
+      }
+    ).pipe(
+      map((data:{ employees: employee[]; roles: role[] }) => {
+        return data.employees.map((employee) => {
+          const role = data.roles.find(
+            (role) => role.userid === employee.id,
+          );
+          return {
+            id: employee.id,
+            name: employee.name,
+            salary: employee.salary,
+            role: role ? role.role : 'Unknown',
+          };
+        });
+      }),
+    );
+  }
+
+  public async run(): Promise<void> {
+    // this.getEmployeesWithRoles().subscribe(console.log);
   }
 }

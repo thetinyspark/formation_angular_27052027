@@ -1,0 +1,14 @@
+[
+    {
+        "userid": 1,
+        "role": "Manager"
+    }, 
+    {
+        "userid": 2,
+        "role": "Developer"
+    }, 
+    {
+        "userid": 3,
+        "role": "Designer"
+    }
+]
