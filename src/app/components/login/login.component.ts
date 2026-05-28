@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  private _loginService: LoginService = inject(LoginService);
+  public isLoggedIn: boolean = false;
 
+  public onLogin(): void {
+    this.isLoggedIn = this._loginService.login("admin", "admin");
+  }
 }

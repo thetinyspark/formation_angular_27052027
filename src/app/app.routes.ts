@@ -5,10 +5,17 @@ import { CartComponent } from './components/cart/cart.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { isCartNotEmptyGuard } from './guards/is-cart-not-empty.guard';
+import { isConnectedGuard } from './guards/is-connected.guard';
+import { isNotConnectedGuard } from './guards/is-not-connected.guard';
 
 const routeConfig: Routes = [
   {
     path: '',
+    component: HomeComponent,
+    title: 'Home page'
+  },
+  {
+    path: 'home',
     component: HomeComponent,
     title: 'Home page'
   },
@@ -21,12 +28,14 @@ const routeConfig: Routes = [
     path: 'cart',
     component: CartComponent,
     title: 'Cart page',
-    canActivate: [isCartNotEmptyGuard]
+    canActivate: [isConnectedGuard, isCartNotEmptyGuard]
   },
   {
     path: 'login',
     component: LoginComponent,
-    title: 'Login page'
+    title: 'Login page',
+    canActivate: [isNotConnectedGuard], 
+    canDeactivate: [isConnectedGuard]
   },
   {
     path: 'product/:id',
