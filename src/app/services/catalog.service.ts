@@ -29,54 +29,42 @@ export class CatalogService {
     return this._products.find(product => product.id === id) || null;
   }
 
-  public async run():Promise<void>{
-    const waitFor4Seconds = new Promise<string>(
-      (resolve, reject)=>{
-        setTimeout(() => {
-          resolve("coucou");
-        }, 4000);
-      }
-    );
-
-    // Une promesse est un objet qui représente une opération asynchrone 
-    // et qui peut être dans l'un des trois états suivants : en attente (pending), 
-    // résolue (fulfilled) ou rejetée (rejected).
-    // C'est une façon standardisée de gérer les opérations asynchrones en Javascript. 
-
-    // une promesse ne peut être résolue ou rejetée qu'une seule fois. 
-    // Une fois qu'une promesse est résolue ou rejetée, son état ne peut plus changer.
-    console.log("le traitement commence");
-
-    // une promesse traitée avec async/await doit être entourée d'un bloc try/catch pour gérer les erreurs potentielles.
-    // l'éxécution du code dans le bloc try est suspendue jusqu'à ce que la promesse soit résolue ou rejetée.
+  private async loadRemoteJSON<T>(url:string, defaultValue:T):Promise<T> {
+    
     try{
-      const result = await waitFor4Seconds;
-      console.log("4 secondes se sont écoulées", result);
-    }
+      return await(await fetch(url)).json() as T;
+    } 
     catch(error){
-      console.error("une erreur s'est produite : ", error);
+      console.error(`Error loading JSON from ${url}:`, error);
+      return defaultValue;
     }
-    finally{
-      console.log("le traitement est terminé");
-    }
-   
 
-    window.fetch("./assets/catalog.json").then(
-      (response)=>{
-        if( response.ok ) {
-          response.json().then(
-            (data)=>{
-              console.log("données du catalogue : ", data);
+  }
+  public async run():Promise<void>{
+
+    const promise = new Promise(
+      async (resolve, reject) => {
+        type employee = { id: number; name: string };
+        type salary = { userid: number; amount: number };
+        const employees = await this.loadRemoteJSON<employee[]>('./assets/employees.json', []);
+        const salaries = await this.loadRemoteJSON<salary[]>('./assets/salaries.json', []);
+        resolve(
+            employees.map(
+              employee => {
+              const salary = salaries.find(salary => salary.userid === employee.id);
+              return {
+                id: employee.id,
+                name: employee.name,
+                salary: salary ? salary.amount : 0
+              };
             }
-          ).catch(
-            (error)=>{
-              console.error("une erreur s'est produite lors de la lecture du flux de données : ", error);
-            }
-          );
-        }
+          )
+        );
       }
     );
 
 
+    const results = await promise;
+    console.log(results);
   }
 }
