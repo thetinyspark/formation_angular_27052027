@@ -8,8 +8,11 @@ import { Product } from '../model/product';
 export class NamePipe implements PipeTransform {
   transform(products: Product[], search:string): Product[] {
 
-    return products;
-
+   return products.filter(
+    (product)=>{
+      return product.name.toLowerCase().includes(search.toLowerCase());
+    }
+   )
     // return products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()));
   }
 
