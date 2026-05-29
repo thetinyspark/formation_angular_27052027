@@ -2,12 +2,18 @@ import { TestBed } from '@angular/core/testing';
 
 import { CartService } from './cart.service';
 import { CATALOG } from '../mocks/product.mocks';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { cartInterceptor } from '../interceptors/cart.interceptor';
 
 fdescribe('CartService', () => {
   let service: CartService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(withInterceptors([cartInterceptor])),
+      ]
+    });
     service = TestBed.inject(CartService);
     service.reset();
   });

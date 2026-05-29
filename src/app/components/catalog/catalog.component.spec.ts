@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { signal } from '@angular/core';
 import { Product } from '../../model/product';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { catalogInterceptor } from '../../interceptors/catalog.interceptor';
 
 fdescribe('CatalogComponent', () => {
   let component: CatalogComponent;
@@ -33,6 +35,7 @@ fdescribe('CatalogComponent', () => {
       providers: [
         {provide: CartService, useValue: cartService},
         {provide: ActivatedRoute, useValue: route},
+        provideHttpClient(withInterceptors([catalogInterceptor])),
       ]
     })
     .compileComponents();

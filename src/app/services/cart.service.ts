@@ -1,5 +1,8 @@
-import { computed, Injectable, signal, WritableSignal } from '@angular/core';
+import { computed, inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Product } from '../model/product';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +14,8 @@ export class CartService {
 
   public cart$ = this._cart.asReadonly();
   public vat$ = this._vat.asReadonly();
+  public http = inject(HttpClient);
+
   public totalPrice$ = computed(() => {
     let totalPrice = 0;
     for (const product of this._cart()) {
@@ -23,15 +28,20 @@ export class CartService {
     this.load();
   }
 
-  private load(): void {
-    const cartData = localStorage.getItem('cart');
-    if (cartData) {
-      this._cart.set(JSON.parse(cartData));
-    }
+  // private load(): void {
+  //   const cartData = localStorage.getItem('cart');
+  //   if (cartData) {
+  //     this._cart.set(JSON.parse(cartData));
+  //   }
+  // }
+
+  private async load(): Promise<void> {
+    const cartData = await firstValueFrom(this.http.get<Product[]>(environment.cartApiUrl))
+    this._cart.set(cartData);
   }
 
   private save():void{
-    localStorage.setItem('cart', JSON.stringify(this._cart()));
+    this.http.post<Product[]>(environment.cartApiUrl, JSON.stringify(this._cart()));
   }
 
   public addToCart(product: Product) {
