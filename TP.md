@@ -1,4 +1,4 @@
-TP n°15
+TP n°16
 
-- Sur le même modèle que le test de catalogComponent, créer une suite de test pour 
-CartComponent
+- Sur le même que le catalog interceptor, créer un interceptor pour obtenir 
+le contenu du panier dans le cartService

@@ -20,7 +20,7 @@ export class CatalogService {
     let products:Product[] = [];
     try{
       products = await firstValueFrom(
-        this.httpClient.get<Product[]>(environment.productApiUrl+"?random="+Math.random()),
+        this.httpClient.get<Product[]>(environment.productApiUrl),
       );
     }
     catch(error){};
