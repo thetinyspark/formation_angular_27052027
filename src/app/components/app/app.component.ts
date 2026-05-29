@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet} from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PreloaderComponent } from '../preloader/preloader.component';
+import { CatalogService } from '../../services/catalog.service';
 
 @Component({
   selector: 'app-root',
