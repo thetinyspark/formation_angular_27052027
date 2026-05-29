@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { effect, inject, Injectable, signal } from '@angular/core';
-import { pipe, delay, firstValueFrom } from 'rxjs';
+import { inject, Injectable, signal } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { Product } from '../model/product';
 import { environment } from '../../environments/environment';
 
@@ -15,20 +15,9 @@ export class CatalogService {
   public products$ = this._products$.asReadonly();
   public platforms$ = this._platforms$.asReadonly();
 
-  // constructor() {
-  //   setInterval(() => {
-  //     this.refresh();
-  //   }, 10000);
-
-  //   this.refresh();
-  // }
-
   public async refresh():Promise<void>{
-    console.log('Refreshing catalog...');
     const products = await firstValueFrom(
-      this.httpClient.get<Product[]>(environment.productApiUrl+"?random="+Math.random()).pipe(
-        delay(5000),
-      ),
+      this.httpClient.get<Product[]>(environment.productApiUrl+"?random="+Math.random()),
     );
     
     const platforms = Array.from(
@@ -40,7 +29,7 @@ export class CatalogService {
     this._platforms$.set(platforms);
   }
 
-  public async getProductById(id: number): Promise<Product | null> {
+  public getProductById(id: number): Product | null {
     return this.products$().find((product) => product.id === id) || null;
   }
 }

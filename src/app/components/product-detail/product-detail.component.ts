@@ -23,7 +23,7 @@ export class ProductDetailComponent {
     this.route.paramMap.subscribe(async params => {
       const id = params.get('id');
       if (id) {
-        this.product = await this.catalog.getProductById(parseInt(id));
+        this.product = this.catalog.getProductById(parseInt(id));
       }
     });
   }
