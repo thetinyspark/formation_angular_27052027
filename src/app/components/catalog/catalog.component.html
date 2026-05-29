@@ -16,7 +16,6 @@
 </div>
 
 <br/>
-
 <app-product    *ngFor="let currentProduct of products$()|productFilter:getFilters()" 
                 [product]="currentProduct"
                 [canBuy]="true"

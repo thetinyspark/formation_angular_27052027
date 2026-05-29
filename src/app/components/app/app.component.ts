@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, NgZone } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, NgZone, SimpleChange, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet} from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
@@ -39,60 +39,56 @@ import { CatalogService } from '../../services/catalog.service';
   imports: [CommonModule, RouterOutlet, NavbarComponent, PreloaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css', 
-  // changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class AppComponent {
+
+  @Input()
   public title: string = 'MyApp';
-  public counter:number = 0;
-  public stockPrice:number = 0;
-  private _lastUpdateTime:number = 0;
-  private _detectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
-  private ngZone:NgZone = inject(NgZone)
+  constructor() {}
 
-
-
-  constructor() {
-    // const customComponent = new ExampleComponent();
-
-    // customComponent.update({name: "toto", age: 30}); 
-    // console.log(customComponent.isUpdated());
-    // console.log(customComponent.isUpdated());
-
-    // customComponent.update({name: "Merlin"});
-    // console.log(customComponent.isUpdated());
-    // console.log(customComponent.isUpdated());
-    // console.log(customComponent.getState());
-
-    this.ngZone.runOutsideAngular( 
-      ()=>{
-        setInterval( 
-          ()=>{
-            this.stockPrice = Math.round( Math.random() * 100 );
-            if( Date.now() - this._lastUpdateTime > 1000){
-              this.ngZone.run( 
-                ()=>{
-                  this._detectorRef.markForCheck();
-                  this._lastUpdateTime = Date.now();
-                  // this._detectorRef.detectChanges();
-                }
-              )
-            }
-          }, 
-          10
-        )
+  // en règle générale on ne sert pas trop de ce hook, car il est appelé trop fréquemment
+  ngOnChanges(changes:SimpleChanges):void{
+    if( changes["title"]){
+      switch( changes["title"].currentValue){
+        case "MyApp": 
+          changes["title"].currentValue = "MySuperApp"; 
+          break;
       }
-    )
-
-
+    }
   }
 
-  public increment(){
-    this.counter++;
-    // this._detectorRef.markForCheck();
-    // this._detectorRef.detectChanges();
-  }
-
+  // lui est appelé quand le composant est initialisé et qu'il n'y a plus de changements sur les @Input après l'initialisaton du composant
   ngOnInit(){
     // this._detectorRef.detach();
+  }
+
+  // trop fréquemment appelé à éviter
+  ngDoCheck():void{
+    // est appelé chaque fois qu'il y a un changement d'état
+  }
+
+  ngOnDestroy():void{
+    // est appelé avant que le composant ne soit détruit
+  }
+
+  // trop fréquemment appelé à éviter
+  ngAfterContentInit():void{
+    // est appelé lorsque le contenu projeté a été initialisé
+  }
+
+  // trop fréquemment appelé à éviter
+  ngAfterContentChecked():void{
+    // est appelé lorsque le contenu projeté a été vérifié
+  }
+
+  // trop fréquemment appelé à éviter
+  ngAfterViewInit():void{
+    // est appelé lorsque le dom du composant ainsi que celui de ses enfants est initialisé
+  }
+
+  // trop fréquemment appelé à éviter
+  ngAfterViewChecked():void{
+    // est appelé lorsque le dom du composant ainsi que celui de ses enfants est vérifié
   }
 }
