@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { effect, inject, Injectable, signal } from '@angular/core';
-import { combineLatest, firstValueFrom, forkJoin, interval, map, Observable, ReplaySubject, Subject, take, takeLast } from 'rxjs';
+import { pipe, delay, firstValueFrom } from 'rxjs';
 import { Product } from '../model/product';
 import { environment } from '../../environments/environment';
 
@@ -26,7 +26,9 @@ export class CatalogService {
   public async refresh():Promise<void>{
     console.log('Refreshing catalog...');
     const products = await firstValueFrom(
-      this.httpClient.get<Product[]>(environment.productApiUrl+"?random="+Math.random()),
+      this.httpClient.get<Product[]>(environment.productApiUrl+"?random="+Math.random()).pipe(
+        delay(5000),
+      ),
     );
     
     const platforms = Array.from(
