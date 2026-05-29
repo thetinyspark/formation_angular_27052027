@@ -3,10 +3,13 @@ import { Product } from '../model/product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { firstValueFrom } from 'rxjs';
+import { LogMethodCall } from '../decorators/LogMethodCall';
+import { RegisterClass } from '../decorators/RegisterClass';
 
 @Injectable({
   providedIn: 'root',
 })
+@RegisterClass({toto:'titi', tata:'tutu'})
 export class CartService {
   
   private _cart: WritableSignal<Product[]> = signal([]);
@@ -28,6 +31,7 @@ export class CartService {
     this.load();
   }
 
+  @LogMethodCall
   private async load(): Promise<void> {
     const cartData = await firstValueFrom(this.http.get<Product[]>(environment.cartApiUrl))
     this._cart.set(cartData);
@@ -37,6 +41,7 @@ export class CartService {
     this.http.post<Product[]>(environment.cartApiUrl, JSON.stringify(this._cart()));
   }
 
+  @LogMethodCall
   public addToCart(product: Product) {
     const cart = this._cart();
     cart.push(product);

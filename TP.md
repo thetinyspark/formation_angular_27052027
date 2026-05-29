@@ -1,4 +1,3 @@
-TP n°16
+TP n°17
 
-- Sur le même que le catalog interceptor, créer un interceptor pour obtenir 
-le contenu du panier dans le cartService
+- Créer un decorator de méthode nommé Test permettant de stocker des fonctions à éxécuter. Créer une fonction globale dans le même fichier permettant de lancer les tests en question.
