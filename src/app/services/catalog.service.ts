@@ -16,9 +16,15 @@ export class CatalogService {
   public platforms$ = this._platforms$.asReadonly();
 
   public async refresh():Promise<void>{
-    const products = await firstValueFrom(
-      this.httpClient.get<Product[]>(environment.productApiUrl+"?random="+Math.random()),
-    );
+
+    let products:Product[] = [];
+    try{
+      products = await firstValueFrom(
+        this.httpClient.get<Product[]>(environment.productApiUrl+"?random="+Math.random()),
+      );
+    }
+    catch(error){};
+    
     
     const platforms = Array.from(
       new Set(products.map((product) => product.platform)),

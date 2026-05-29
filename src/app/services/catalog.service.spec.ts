@@ -56,4 +56,17 @@ fdescribe('CatalogService', () => {
     const expected = CATALOG[index] || null;
     expect(service.getProductById(expected?.id)).toEqual(expected);
   });
+
+  it('should handle a failure properly', async () => {
+
+    const spy = spyOn(fakeHttpClient, 'get').and.callFake( 
+      ()=>{ 
+        throw new Error("impossible");
+      }
+    );
+
+    await service.refresh();
+    expect(service.products$().length).toEqual(0);
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
 });

@@ -21,7 +21,6 @@ export class CatalogComponent {
   public route = inject(ActivatedRoute);
   // public catalog = inject(CatalogService);
   public cart = inject(CartService);
-  public products: Product[] = [];
   public products$ = signal<Product[]>([]);
   public platforms$ = signal<string[]>([]);
 
@@ -33,7 +32,6 @@ export class CatalogComponent {
   constructor() {
     this.route.data.subscribe(data => {
       if (data['catalog']) {
-        console.log('Catalog data resolved successfully', data['catalog']);
         this.products$ = data['catalog'].catalog;
         this.platforms$ = data['catalog'].platforms;
       }
