@@ -1,5 +1,8 @@
 <main id="mainContent">
     <h1>{{title}}</h1>
+    <button (click)="increment()">+</button>{{counter}} <br/>
+    <p>{{stockPrice}}</p>
+    
     <app-navbar></app-navbar>
     <router-outlet></router-outlet>
     <app-preloader></app-preloader>

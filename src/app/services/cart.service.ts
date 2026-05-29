@@ -28,13 +28,6 @@ export class CartService {
     this.load();
   }
 
-  // private load(): void {
-  //   const cartData = localStorage.getItem('cart');
-  //   if (cartData) {
-  //     this._cart.set(JSON.parse(cartData));
-  //   }
-  // }
-
   private async load(): Promise<void> {
     const cartData = await firstValueFrom(this.http.get<Product[]>(environment.cartApiUrl))
     this._cart.set(cartData);
