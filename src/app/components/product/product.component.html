@@ -7,13 +7,13 @@
     @if(detailed == true){
         <div>
             <p>{{ product.description }}</p>
-            <p>Platform: {{ product.platform }}</p>
         </div>
     }
     @else{
         <a [routerLink]="['/product', product.id]">Details</a><br />
     }
-
+    <p>Platform: {{ product.platform }}</p>
+    
     @if( canBuy == true ){
         <button (click)="addToCart()">Add to Cart</button>
     }

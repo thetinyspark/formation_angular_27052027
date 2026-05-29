@@ -5,18 +5,7 @@ import { Product } from '../model/product';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root', 
-  useFactory: ()=>{
-    // je mets ma logique qui me permet de décider si je renvoie une nouvelle instance
-    // ou une déjà existante
-
-    // if( condition1 ){
-    //   alors je renvoie la même instance générale pour tout le monde
-    // }
-    // else{
-    //   return new CatalogService();
-    // }
-  }
+  providedIn: 'root'
 })
 export class CatalogService {
   public httpClient = inject(HttpClient);
