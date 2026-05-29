@@ -1,4 +1,4 @@
-TP n°14
+TP n°15
 
-- Sur le même modèle que le teste du catalogservice, créez le jeu de tests pour 
-le cartservice.
+- Sur le même modèle que le test de catalogComponent, créer une suite de test pour 
+CartComponent
