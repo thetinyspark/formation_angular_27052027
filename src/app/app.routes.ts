@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { CatalogComponent } from './components/catalog/catalog.component';
+// import { CatalogComponent } from './components/catalog/catalog.component';
 import { CartComponent } from './components/cart/cart.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { isCartNotEmptyGuard } from './guards/is-cart-not-empty.guard';
 import { isConnectedGuard } from './guards/is-connected.guard';
 import { isNotConnectedGuard } from './guards/is-not-connected.guard';
 import { catalogResolver } from './resolvers/catalog.resolver';
@@ -22,7 +21,12 @@ const routeConfig: Routes = [
   },
   {
     path: 'catalog',
-    component: CatalogComponent,
+    // component: CatalogComponent,
+    loadComponent: ():any=>import("./components/catalog/catalog.component").then(
+      (module)=>{
+        return module.CatalogComponent;
+      }
+    ),
     title: 'Catalog page', 
     resolve: { 
       catalog: catalogResolver 
