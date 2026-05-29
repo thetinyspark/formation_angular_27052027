@@ -6,9 +6,11 @@ import { Product } from '../model/product';
   standalone: true
 })
 export class NamePipe implements PipeTransform {
-
   transform(products: Product[], search:string): Product[] {
-    return products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()));
+
+    return products;
+
+    // return products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()));
   }
 
 }

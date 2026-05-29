@@ -4,8 +4,8 @@ import { CanDeactivateFn } from '@angular/router';
 import { isNotConnectedGuard } from './is-not-connected.guard';
 
 describe('isNotConnectedGuard', () => {
-  const executeGuard: CanDeactivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => isNotConnectedGuard(...guardParameters));
+  const executeGuard: CanDeactivateFn<unknown> = (component, currentRoute, currentState, nextState) => 
+      TestBed.runInInjectionContext(() => isNotConnectedGuard(component, currentRoute, currentState, nextState));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
